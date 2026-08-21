@@ -1,52 +1,108 @@
 ### Tanmay Jain
 
-Full-stack engineer, eleven years building and running production systems.
-Available for freelance work in **React, Python and PostgreSQL**.
+**Full-stack engineer — React · Python · PostgreSQL**
+Eleven years building and running production systems. Available for freelance work.
 
-I tend to care about the unglamorous parts: imports that tell you what they are
-about to do before they do it, migrations that can be reversed, error messages
-that name the row and the column, and decisions that stay visible after the
+I care about the unglamorous parts: migrations that can be reversed, error
+messages that name the row and the column, permissions the server enforces
+rather than the interface hiding, and decisions that stay legible after the
 person who made them has moved on.
 
 ---
 
-#### ReturnDesk — returns reconciliation
+## 🚀 Projects
 
-A DTC apparel brand ran its returns on one Excel file and could not tell how
-much money was walking out of the door. Three monthly exports — refunds, the
-warehouse scan log, the courier invoice — matched against each other, with
-everything that does not reconcile in one queue sorted by value.
+Both are live. Both have published logins. Neither asks you to take my word for
+anything.
 
-On seven months of data it surfaces **$79,828** the spreadsheet could not see:
-refunds for parcels that never arrived, customers who returned goods and were
-never paid, and refunds issued twice.
+| Project | The problem | What it proves | |
+|---|---|---|---|
+| **ReturnDesk**<br>Returns reconciliation | A DTC apparel brand ran returns on one spreadsheet and could not tell how much money was leaving. | Matches three monthly files that disagree — refunds, warehouse scans, courier invoices — into one queue sorted by money at risk. Surfaced **$79,828** across 1,213 cases in about four seconds. | [Demo](https://returndesk-web.onrender.com) · [Code](https://github.com/tanmayjain70/returndesk) |
+| **ServiceLine**<br>Multi-tenant SaaS | Field service scheduling sold to many contractor companies, where none may ever see another's data. | Tenant isolation enforced by PostgreSQL row-level security instead of a `WHERE` clause you have to remember. Ten tables protected; the API refuses to boot if the database is not enforcing it. | [Demo](https://serviceline-web.onrender.com) · [Code](https://github.com/tanmayjain70/serviceline) |
 
-[Live demo](https://returndesk-web.onrender.com) ·
-[Source](https://github.com/tanmayjain70/returndesk) ·
-sign in with `ops@harrowvine.demo` / `demo-password`
+**Sign in and try to break them**
 
-#### ServiceLine — multi-tenant SaaS
+| | |
+|---|---|
+| ReturnDesk | `ops@harrowvine.demo` / `demo-password` — or sign in as the coordinator and try to resolve a case over $250. The button is right there; the API returns 403. |
+| ServiceLine | `owner@northline.demo` / `demo-password` — then sign in as `owner@buckeye.demo`, take a record ID from the first company and request it. You get 404, not 403: confirming the row exists would leak that it does. |
 
-Field service scheduling for HVAC and plumbing contractors. Tenant isolation is
-enforced by PostgreSQL row-level security rather than by remembering a `WHERE`
-clause in every query — so the failure that usually leaks one customer's data
-into another customer's screen is not possible to write.
+> Both are personal projects, built solo against a written brief rather than paid
+> client work. Each repository carries the brief, the scoping questions that
+> changed it, and what was cut to fit the budget.
 
-[Live demo](https://serviceline-web.onrender.com) ·
-[Source](https://github.com/tanmayjain70/serviceline) ·
-sign in with `owner@northline.demo` / `demo-password`
-
-> Both are personal projects, built against a written brief rather than paid
-> client work. The briefs, the scoping questions that changed them, and the
-> trade-offs behind each decision are documented in the repositories — that
-> part is usually more interesting than the code.
+Hosted on free tiers that sleep when idle, so **the first request can take up to
+a minute** while the server wakes.
 
 ---
 
-React · TypeScript · Python (FastAPI, SQLAlchemy) · PostgreSQL · Docker ·
-GitHub Actions
+## 🏗️ How I build
 
-📫 tanmayjain70@gmail.com
+Enforce it in the layer that cannot be bypassed · reversible migrations ·
+tests that attack the thing rather than confirm it · errors that say what to do
+next · the deployment pipeline on day one, not the last week · write down why,
+not just what · cut scope, never rigour
 
-<sub>The demos are on a free tier that sleeps when idle, so the first sign-in
-can take up to a minute while the server wakes.</sub>
+---
+
+## 🧠 Tech stack
+
+**Backend** — Python · FastAPI · SQLAlchemy 2 · Alembic · psycopg 3 · Pydantic · pytest
+
+**Frontend** — React 19 · TypeScript · Vite · TanStack Query · Tailwind
+
+**Data** — PostgreSQL 17/18 · row-level security · schema design · reconciliation and reporting
+
+**Delivery** — Docker · GitHub Actions · Neon · Render · infrastructure as code
+
+**Also** — REST API design · RBAC and multi-tenancy · Excel/PDF generation · scheduled jobs
+
+---
+
+## 📋 What the two projects actually demonstrate
+
+| | ReturnDesk | ServiceLine |
+|---|---|---|
+| Tests | 58, 79% coverage | 112, green in CI |
+| End-to-end checks | 21 against a running server | 27 against the live deployment |
+| Hard part | Matching three sources that disagree, and being honest about what does not reconcile | Isolation the database enforces, and scheduling across timezones |
+| Worth a look | The exception queue sorted by money at risk | The dispatch board — drag to assign, with each job's timezone on the card |
+
+The second one is less obvious than it sounds. A booked window is a promise in
+the customer's local time, so it is stored twice — once as written, once as UTC
+instants — because two jobs in different timezones can overlap on a wall clock
+while not overlapping in reality. One target customer works both sides of the
+Ohio/Indiana line, where half of Indiana observes Central.
+
+---
+
+## 💼 Background
+
+- **Eleven years** building and running production software in a large engineering organisation
+- Now working with founders and small teams who want that standard applied to their product
+- Most useful on the things that are expensive to get wrong later: multi-tenant architecture, access control, data modelling, and integrations that have to survive real-world failure
+- Comfortable owning a piece end to end — schema, API, interface, pipeline, deploy
+
+---
+
+## 📫 Reach me
+
+[tanmayjain70@gmail.com](mailto:tanmayjain70@gmail.com)
+
+---
+
+<!-- ─────────────────────────────────────────────────────────────────────────
+     GITHUB STATS CARD — commented out on purpose.
+
+     github-readme-stats is a free third-party service on Vercel and it was
+     returning 503 on every attempt when this was written. A broken image at the
+     bottom of a profile is worse than no image, and nobody notices their own
+     profile is broken because their browser has the old one cached.
+
+     To turn it on, delete this comment's opening and closing lines. Check it
+     renders in a private window afterwards, and check again occasionally --
+     when the service is rate-limited it fails silently.
+
+![Tanmay's GitHub stats](https://github-readme-stats.vercel.app/api?username=tanmayjain70&show_icons=true&hide_border=true&count_private=true&include_all_commits=true&hide_title=true)
+
+     ───────────────────────────────────────────────────────────────────────── -->
