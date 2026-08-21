@@ -1,7 +1,7 @@
 ### Tanmay Jain
 
 **Full-stack engineer — React · Python · PostgreSQL**
-Eleven years building and running production systems. Available for freelance work.
+Twelve years building and running production systems. Available for freelance work.
 
 I care about the unglamorous parts: migrations that can be reversed, error
 messages that name the row and the column, permissions the server enforces
@@ -78,7 +78,7 @@ Ohio/Indiana line, where half of Indiana observes Central.
 
 ## 💼 Background
 
-- **Eleven years** building and running production software in a large engineering organisation
+- **12+ years** building and running production software in a large engineering organisation
 - Now working with founders and small teams who want that standard applied to their product
 - Most useful on the things that are expensive to get wrong later: multi-tenant architecture, access control, data modelling, and integrations that have to survive real-world failure
 - Comfortable owning a piece end to end — schema, API, interface, pipeline, deploy
