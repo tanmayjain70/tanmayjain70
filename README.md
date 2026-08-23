@@ -19,6 +19,7 @@ anything.
 |---|---|---|---|
 | **ReturnDesk**<br>Returns reconciliation | A DTC apparel brand ran returns on one spreadsheet and could not tell how much money was leaving. | Matches three monthly files that disagree — refunds, warehouse scans, courier invoices — into one queue sorted by money at risk. Surfaced **$79,828** across 1,213 cases in about four seconds. | [Demo](https://returndesk-web.onrender.com) · [Code](https://github.com/tanmayjain70/returndesk) |
 | **ServiceLine**<br>Multi-tenant SaaS | Field service scheduling sold to many contractor companies, where none may ever see another's data. | Tenant isolation enforced by PostgreSQL row-level security instead of a `WHERE` clause you have to remember. Ten tables protected; the API refuses to boot if the database is not enforcing it. | [Demo](https://serviceline-web.onrender.com) · [Code](https://github.com/tanmayjain70/serviceline) |
+| **Driftwatch**<br>Integration integrity | A roaster's sync to Shopify and Stripe stopped in February. Nobody noticed for eleven days: the dashboards kept showing numbers, just the same numbers. | Signed webhook ingest that survives duplicate delivery, a resumable backfill paced to the providers' rate limits, and a drift check that names the specific missing records — and reports **unknown** rather than clean when it cannot reach a provider. | [Demo](https://driftwatch-web.onrender.com) · [Code](https://github.com/tanmayjain70/driftwatch) |
 
 **Sign in and try to break them**
 
@@ -26,6 +27,7 @@ anything.
 |---|---|
 | ReturnDesk | `ops@harrowvine.demo` / `demo-password` — or sign in as the coordinator and try to resolve a case over $250. The button is right there; the API returns 403. |
 | ServiceLine | `owner@northline.demo` / `demo-password` — then sign in as `owner@buckeye.demo`, take a record ID from the first company and request it. You get 404, not 403: confirming the row exists would leak that it does. |
+| Driftwatch | `owner@kettleford.demo` / `demo-password` — press "Simulate live traffic" and watch one webhook arrive twice and be marked a duplicate rather than applied again. Then open a drift finding: it lists the exact records that are missing. |
 
 > Both are personal projects, built solo against a written brief rather than paid
 > client work. Each repository carries the brief, the scoping questions that
@@ -55,7 +57,7 @@ not just what · cut scope, never rigour
 
 **Delivery** — Docker · GitHub Actions · Neon · Render · infrastructure as code
 
-**Also** — REST API design · RBAC and multi-tenancy · Excel/PDF generation · scheduled jobs
+**Also** — REST API design · RBAC and multi-tenancy · webhooks, retries and idempotency · Excel/PDF generation · scheduled jobs
 
 ---
 
