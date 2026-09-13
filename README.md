@@ -12,11 +12,12 @@ person who made them has moved on.
 
 ## 🚀 Projects
 
-Both are live. Both have published logins. Neither asks you to take my word for
-anything.
+All four are live, each with a published login. None of them asks you to take
+my word for anything.
 
 | Project | The problem | What it proves | |
 |---|---|---|---|
+| **Footnote**<br>Document question answering | A property firm's chat-with-your-PDFs tool said a lease's break notice was three months. It was six. They acted on it and were locked in for another five years. | Every answer cites the page it came from, and each citation is checked against the passage that was actually retrieved. With nothing verified to point at, it says **not answerable** instead of guessing. Hybrid search in PostgreSQL — pgvector plus full-text — a register of seventeen lease terms a person confirms, and an evaluation harness: the right page is found **94%** of the time. | [Demo](https://footnote-web-xgu5.onrender.com) |
 | **ReturnDesk**<br>Returns reconciliation | A DTC apparel brand ran returns on one spreadsheet and could not tell how much money was leaving. | Matches three monthly files that disagree — refunds, warehouse scans, courier invoices — into one queue sorted by money at risk. Surfaced **$79,828** across 1,213 cases in about four seconds. | [Demo](https://returndesk-web.onrender.com) · [Code](https://github.com/tanmayjain70/returndesk) |
 | **ServiceLine**<br>Multi-tenant SaaS | Field service scheduling sold to many contractor companies, where none may ever see another's data. | Tenant isolation enforced by PostgreSQL row-level security instead of a `WHERE` clause you have to remember. Ten tables protected; the API refuses to boot if the database is not enforcing it. | [Demo](https://serviceline-web.onrender.com) · [Code](https://github.com/tanmayjain70/serviceline) |
 | **Driftwatch**<br>Integration integrity | A roaster's sync to Shopify and Stripe stopped in February. Nobody noticed for eleven days: the dashboards kept showing numbers, just the same numbers. | Signed webhook ingest that survives duplicate delivery, a resumable backfill paced to the providers' rate limits, and a drift check that names the specific missing records — and reports **unknown** rather than clean when it cannot reach a provider. | [Demo](https://driftwatch-web.onrender.com) · [Code](https://github.com/tanmayjain70/driftwatch) |
@@ -25,13 +26,18 @@ anything.
 
 | | |
 |---|---|
+| Footnote | `director@hallampryce.demo` / `demo-password` — ask when a lease ends, then ask for the landlord's bank details. The first comes back citing the page; the second comes back *not answerable*, with nothing cited. Then sign in as `manager@hallampryce.demo` and open a document from the confidential portfolio: 404. |
 | ReturnDesk | `ops@harrowvine.demo` / `demo-password` — or sign in as the coordinator and try to resolve a case over $250. The button is right there; the API returns 403. |
 | ServiceLine | `owner@northline.demo` / `demo-password` — then sign in as `owner@buckeye.demo`, take a record ID from the first company and request it. You get 404, not 403: confirming the row exists would leak that it does. |
 | Driftwatch | `owner@kettleford.demo` / `demo-password` — press "Simulate live traffic" and watch one webhook arrive twice and be marked a duplicate rather than applied again. Then open a drift finding: it lists the exact records that are missing. |
 
-> Both are personal projects, built solo against a written brief rather than paid
-> client work. Each repository carries the brief, the scoping questions that
-> changed it, and what was cut to fit the budget.
+> All four are personal projects, built solo against a written brief rather than
+> paid client work. Each brief records the scoping questions that changed it and
+> what was cut to fit the budget; the public repositories carry theirs.
+
+Footnote's public demo answers by quoting the retrieved passages rather than
+calling a paid language model, so it costs nothing to try; the model integration
+is one setting away.
 
 Hosted on free tiers that sleep when idle, so **the first request can take up to
 a minute** while the server wakes.
@@ -53,28 +59,30 @@ not just what · cut scope, never rigour
 
 **Frontend** — React 19 · TypeScript · Vite · TanStack Query · Tailwind
 
-**Data** — PostgreSQL 17/18 · row-level security · schema design · reconciliation and reporting
+**Data** — PostgreSQL 17/18 · pgvector · row-level security · schema design · reconciliation and reporting
+
+**AI & search** — retrieval-augmented generation · hybrid vector and full-text search with rank fusion · local embeddings · citation-grounded LLM answers (Anthropic API) · evaluation harnesses for retrieval quality
 
 **Delivery** — Docker · GitHub Actions · Neon · Render · infrastructure as code
 
-**Also** — REST API design · RBAC and multi-tenancy · webhooks, retries and idempotency · Excel/PDF generation · scheduled jobs
+**Also** — REST API design · RBAC and multi-tenancy · webhooks, retries and idempotency · PDF ingestion · LLM cost metering and budgets · job queues in PostgreSQL · Excel/PDF generation · scheduled jobs
 
 ---
 
-## 📋 What the two projects actually demonstrate
+## 📋 What the projects actually demonstrate
 
-| | ReturnDesk | ServiceLine |
-|---|---|---|
-| Tests | 58, 79% coverage | 112, green in CI |
-| End-to-end checks | 21 against a running server | 27 against the live deployment |
-| Hard part | Matching three sources that disagree, and being honest about what does not reconcile | Isolation the database enforces, and scheduling across timezones |
-| Worth a look | The exception queue sorted by money at risk | The dispatch board — drag to assign, with each job's timezone on the card |
+| | Footnote | ReturnDesk | ServiceLine | Driftwatch |
+|---|---|---|---|---|
+| Tests | 325, 96% coverage | 58, 79% coverage | 112, green in CI | 40, 82% coverage |
+| End-to-end checks | 28 against the live deployment | 21 against a running server | 27 against the live deployment | 18 against a running server |
+| Hard part | Knowing when not to answer, and proving every citation points at a passage that was really retrieved | Matching three sources that disagree, and being honest about what does not reconcile | Isolation the database enforces, and scheduling across timezones | Telling "in sync" apart from "nothing reported a problem" |
+| Worth a look | An answer with its cited passages beside it, and a question it declines | The exception queue sorted by money at risk | The dispatch board — drag to assign, with each job's timezone on the card | A drift finding that names the exact missing records |
 
-The second one is less obvious than it sounds. A booked window is a promise in
-the customer's local time, so it is stored twice — once as written, once as UTC
-instants — because two jobs in different timezones can overlap on a wall clock
-while not overlapping in reality. One target customer works both sides of the
-Ohio/Indiana line, where half of Indiana observes Central.
+ServiceLine's scheduling is less obvious than it sounds. A booked window is a
+promise in the customer's local time, so it is stored twice — once as written,
+once as UTC instants — because two jobs in different timezones can overlap on a
+wall clock while not overlapping in reality. One target customer works both
+sides of the Ohio/Indiana line, where half of Indiana observes Central.
 
 ---
 
@@ -82,7 +90,7 @@ Ohio/Indiana line, where half of Indiana observes Central.
 
 - **12+ years** building and running production software in a large engineering organisation
 - Now working with founders and small teams who want that standard applied to their product
-- Most useful on the things that are expensive to get wrong later: multi-tenant architecture, access control, data modelling, and integrations that have to survive real-world failure
+- Most useful on the things that are expensive to get wrong later: multi-tenant architecture, access control, data modelling, integrations that have to survive real-world failure, and AI features whose answers have to be checkable
 - Comfortable owning a piece end to end — schema, API, interface, pipeline, deploy
 
 ---
