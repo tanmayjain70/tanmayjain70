@@ -116,3 +116,9 @@ sides of the Ohio/Indiana line, where half of Indiana observes Central.
 ![Tanmay's GitHub stats](https://github-readme-stats.vercel.app/api?username=tanmayjain70&show_icons=true&hide_border=true&count_private=true&include_all_commits=true&hide_title=true)
 
      ───────────────────────────────────────────────────────────────────────── -->
+
+## Available for work
+
+Contract and freelance — billing and reconciliation, multi-tenant SaaS, data migrations, document AI with verifiable answers, and inherited codebases that need to become safe to change.
+
+https://www.linkedin.com/in/tanmayjain70/ · https://www.upwork.com/freelancers/tanmayjain · tanmayjain70@gmail.com
